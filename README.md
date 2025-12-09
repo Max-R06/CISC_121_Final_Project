@@ -1,4 +1,15 @@
-
+---
+title: Final Project
+emoji: 📊
+colorFrom: red
+colorTo: gray
+sdk: gradio
+sdk_version: 6.0.2
+app_file: app.py
+pinned: false
+license: mit
+short_description: Sorting Visualizer for CISC 121 final project
+---
 # Sorting Visualizer
 
 A real-time, interactive visualization of sorting algorithms, designed to demonstrate the efficiency differences between $O(n \log n)$ and $O(n^2)$ algorithms.
@@ -152,6 +163,7 @@ ___
        |         FINISH          |
        |    (Color All Green)    |
        +-------------------------+
+```
 ---
 ## Steps to Run Locally
 * **1. Prerequisites**
