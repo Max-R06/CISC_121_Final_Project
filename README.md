@@ -3,11 +3,11 @@
 
 A real-time, interactive visualization of sorting algorithms, designed to demonstrate the efficiency differences between $O(n \log n)$ and $O(n^2)$ algorithms.
 
-**🔗 Hugging Face:** [Final Project - Hugging Face Space](https://huggingface.co/spaces/MaxwellR/Final_Project)
+** Hugging Face:** [Final Project - Hugging Face Space](https://huggingface.co/spaces/MaxwellR/Final_Project)
 
 ---
 
-## 🧠 Algorithm Choices
+## Algorithm Choices
 
 ### Quick Sort (Primary Focus)
 I chose to visualize **Quick Sort** because visualizing an $O(n \log n)$ time complexity sort offers an interesting contrast to simpler methods. Unlike Merge Sort, which is typically an out-of-place algorithm, Quick Sort is done in-place, making the visualization of elements swapping within the array much clearer and aesthetically pleasing.
@@ -19,7 +19,7 @@ I have also implemented quadratic sorts (e.g., Bubble, Selection, Insertion) to 
 
 ---
 
-## 🏗️ Computational Thinking Breakdown
+## Computational Thinking Breakdown
 
 ### 1. Decomposition
 * **User Interface (UI):**
@@ -56,9 +56,125 @@ I have also implemented quadratic sorts (e.g., Bubble, Selection, Insertion) to 
 * **Generator Implementation:**
     * Algorithms are designed as **generators** that yield control at each step. This allows the function to pause or terminate on command without freezing the application.
 
+___
+```text
+       +-------------------------+
+       |      START PROGRAM      |
+       +-----------+-------------+
+                   |
+                   v
+       +-------------------------+
+       |    Initialize Globals   |
+       | control: pause=False... |
+       +-----------+-------------+
+                   |
+                   v
+       +-------------------------+
+       |     SETUP GRADIO UI     |
+       | Buttons, Sliders, Plot  |
+       +-----------+-------------+
+                   |
+                   v
+       +-------------------------+      +-------------------------+
++----->|   WAIT FOR USER INPUT   |<-----|     Update Settings     |<----+
+|      +-----------+-------------+      +-------------------------+     |
+|                  |                                                    |
+|                  +----(User adjusts sliders)--------------------------+
+|                  |                                                    |
+|                  +----(User clicks Pause/Stop)---+                    |
+|                  |                               |                    |
+|                  v                               v                    |
+|          (User Clicks Start)          +-------------------------+     |
+|                  |                    |       Update Flags      |-----+
+|                  |                    +-------------------------+
+|                  v
+|      +-------------------------+
+|      |       RESET FLAGS       |
+|      | cancel=False, pause=False|
+|      +-----------+-------------+
+|                  |
+|                  v
+|      +-------------------------+
+|      |    SELECT ALGORITHM     |
+|      +----+------+-------------+
+|           |      |      |
+|           |      |      +----------> [ Bubble Sort Generator ]
+|           |      +-----------------> [ Quick Sort Generator  ]
+|           +------------------------> [ Insertion/Selection   ]
+|                  |
+|                  v
+|      +-------------------------+
+|      |  GENERATOR LOOP STARTS  |<----------------------------------+
+|      +-----------+-------------+                                   |
+|                  |                                                 |
+|                  v                                                 |
+|      +-------------------------+                                   |
+|      |   CHECK CONTROL FLAGS   |                                   |
+|      +----+------+-------------+                                   |
+|           |      |                                                 |
+|           |      +---(Paused?)-----> +---------------------+       |
+|           |                          |      Async Wait     |-------+
+|           +---(Canceled?)----------> +---------------------+
+|           |
+|           v
+|      +-------------------------+
+|      |  PERFORM SORTING LOGIC  |
+|      | Compare Elements/Swap   |
+|      +-----------+-------------+
+|                  |
+|                  v
+|      +-------------------------+
+|      |     UPDATE VISUALS      |
+|      | Set Heights & Colors    |
+|      +-----------+-------------+
+|                  |
+|                  v
+|      +-------------------------+
+|      |    YIELD FIGURE TO UI   |
+|      |     (Screen Update)     |
+|      +-----------+-------------+
+|                  |
+|                  v
+|      +-------------------------+
+|      |       ASYNC SLEEP       |
+|      |   Wait 'delay' seconds  |
+|      +-----------+-------------+
+|                  |
++------------------+
+                   |
+                   v
+       +-------------------------+
+       |      SORT COMPLETE      |
+       +-----------+-------------+
+                   |
+                   v
+       +-------------------------+
+       |         FINISH          |
+       |    (Color All Green)    |
+       +-------------------------+
+---
+## Steps to Run Locally
+* **1. Prerequisites**
+    * Ensure you have Python 3.7+ installed on your system.
+* **2. Download the Project**
+    * Download the project files to a folder on your computer
+* **3. Set Up a Virtual Environment (Recommended)**
+    * It is best practice to use a virtual environment to manage dependencies.
+* **4. Install Dependencies**
+    * Install the required libraries using the requirements file.
+    * In terminal:
+    * pip install -r requirements.txt
+ 
+* **5. Run the Application**
+    * In terminal:
+    * python app.py
+
+* **6. Open in Browser**
+    * A private link should appear to open in a browser
+
 ---
 
-## 🧪 Testing & Robustness
+## Testing & Robustness
  [**Demo Video**](https://drive.google.com/file/d/1yrT-Po8ZkXcQFXLWL6onbVXIPtFYbVb6/view?usp=sharing)\
  
 *The application (CICS_121_Final_demo) has been tested against the following criteria:
@@ -71,14 +187,15 @@ I have also implemented quadratic sorts (e.g., Bubble, Selection, Insertion) to 
 
 ---
 
-## 👤 Author & Acknowledgements
+## Author & Acknowledgements
 
 **Author:** Maxwell Roemer
 
-### 🤖 AI Acknowledgement (Level 4)
+### AI Acknowledgement (Level 4)
 **Level 4: Code Generation & Significant Assistance**
 
 I acknowledge the use of Artificial Intelligence tools (Google Gemini) to assist in the development of this project. AI was utilized at Level 4, contributing to:
 
 * **Code Generation:** Generating the basic structure for the sorting algorithms and Gradio UI components.
 * **Debugging:** Identifying errors and inefficiencies in the code, as well as problem-solving with directories, paths, and environment configuration.
+* **FlowChart** Used AI to create text based flow chart from physical writen version
